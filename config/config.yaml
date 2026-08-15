@@ -1,0 +1,29 @@
+# CrowdShield core config
+# Edit per-venue when deploying to a new site.
+
+model:
+  weights_path: "models/crowd_head_yolov8.pt"
+  fallback_weights: "yolov8n.pt"
+  confidence_threshold: 0.35
+  tracker_config: "bytetrack.yaml"
+
+video:
+  source: "data/raw_videos/sample.mp4"
+  frame_skip: 1
+
+density:
+  # Real-world area calibration: MUST be measured per camera for real deployment.
+  # Placeholder value for now, used only to validate pipeline logic.
+  ground_area_sqm: 65.0
+
+
+  grid_rows: 4
+  grid_cols: 4
+  # People per sqm thresholds, based on Fruin/Still crowd safety levels of service
+  density_thresholds:
+    safe: 2.0
+    warning: 4.0
+
+risk:
+  density_weight: 0.6
+  movement_weight: 0.4

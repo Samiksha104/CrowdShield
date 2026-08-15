@@ -1,0 +1,16 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Test data / outputs (not needed for integration, keeps repo lightweight)
+outputs/
+data/raw_videos/
+
+# Editor/OS junk
+.DS_Store
+*.swp
+
+# Ultralytics run artifacts
+runs/
