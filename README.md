@@ -18,7 +18,7 @@ uvicorn api_server:app --host 0.0.0.0 --port 8000
 
 Server takes ~10-20 seconds to boot (loading YOLO + CSRNet models).
 
-## Endpoints (matches Android app contract)
+## Endpoints 
 
 - `GET /api/health` — server status
 - `GET /api/zones` — per-zone risk data for heatmap
@@ -27,7 +27,7 @@ Server takes ~10-20 seconds to boot (loading YOLO + CSRNet models).
 - `GET /api/evacuation/routes` — all exits with ETA (optionally pass `?zone_row=X&zone_col=Y` for location-specific routing)
 - `GET /api/risk-prediction` — aggregate risk score + recommendations
 
-## Switching video source (for demo/testing)
+## Switching video source 
 
 ```bash
 curl -X POST http://localhost:8000/api/set-video-source \
@@ -35,7 +35,7 @@ curl -X POST http://localhost:8000/api/set-video-source \
   -d '{"path": "/absolute/path/to/video.mp4"}'
 ```
 
-## Known limitations (documented honestly)
+## Known limitations 
 
 - `ground_area_sqm` in `config/config.yaml` is a placeholder — real deployment requires site-specific measurement for accurate density-per-sqm calibration.
 - Evacuation routing uses a synthetic example blueprint (`data/blueprints/example_venue.json`) — not tied to a real venue yet.
