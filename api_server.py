@@ -51,9 +51,10 @@ pipeline = CrowdShieldPipeline(CONFIG_PATH)
 # --- Shared state, updated continuously by the background worker ---
 _state_lock = threading.Lock()
 _latest_result = None
-_current_video_source = os.path.join(
-    os.path.dirname(__file__), "data", "raw_videos", "MOT20-02", "img1"
-)
+# No hardcoded default — server starts idle until a video is uploaded via
+# /api/upload-video or set via /api/set-video-source. Prevents errors on
+# fresh clones where test data (gitignored) isn't present.
+_current_video_source = None
 _source_changed = threading.Event()
 # --- App-contract adapter state ---
 _alert_history = []  # list of alert dicts, newest first
@@ -126,9 +127,11 @@ def _background_worker():
     global _current_video_source
 
     while True:
+        if _current_video_source is None:
+            time.sleep(1)
+            continue
         try:
             source = _load_frame_source(_current_video_source)
-
             if isinstance(source, list):
                 # Image-sequence folder (MOT-style)
                 for frame_path in source:
