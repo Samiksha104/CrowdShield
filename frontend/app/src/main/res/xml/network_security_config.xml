@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <!--
+        Allows plain HTTP (not HTTPS) to your teammate's local dev server.
+        Restricted to specific IPs/domains rather than allowing cleartext
+        everywhere. Replace 192.168.1.100 with your friend's actual LAN IP
+        (the one their laptop shows when running `ipconfig` / `ifconfig`),
+        and update it whenever it changes (e.g. different Wi-Fi network).
+    -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">192.168.1.100</domain>
+        <domain includeSubdomains="false">10.0.2.2</domain> <!-- Android emulator's alias for host machine's localhost -->
+    </domain-config>
+</network-security-config>
